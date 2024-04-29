@@ -27,8 +27,8 @@ d
 
 # También podríamos mostrar un DataFrame como ejemplo
 df = pd.DataFrame({
-    'Original Text': "1",
-    'Processed Text': "2"
+    'Original Text': ["1"],
+    'Processed Text': ["2"]
 })
 
 st.write(df)
