@@ -9,12 +9,6 @@ st.title('Reserva Secundaria de Frecuencia (RSF)')
 
 ruta_trabajo = st.text_input('Ingrese la ruta de trabajo donde desea guardar los archivos:', '')
 
-# Función para eliminar espacios en blanco
-def remove_spaces(input_string):
-    return input_string.replace(" ", "")
-
-# Llamar a la función y almacenar el resultado
-processed_text = remove_spaces(user_input)
 
 # Mostrar el texto procesado
 st.write('Texto sin espacios:', processed_text)
