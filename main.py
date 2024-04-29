@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
 
-# Título de la aplicación
-st.title('Streamlit Application')
+st.set_page_config(page_title   = "Reserva Secundaria de Frecuencia (RSF)", 
+                   page_icon    = ":syringe:",
+                   layout       = "wide")
 
 # Crear una entrada de texto para que el usuario ingrese una cadena
 user_input = st.text_input('Ingrese su texto:', 'EJE - PROGMW')
