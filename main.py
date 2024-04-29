@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import datetime
 import os
+import base64
+from io import BytesIO
 
 st.set_page_config(page_title   = "RSF", 
                    page_icon    = ":chart:",
@@ -34,10 +36,8 @@ df = pd.DataFrame({
 
 st.write(df)
 
-ruta_trabajo = st.text_input('Ingrese la ruta de trabajo donde desea guardar el archivo CSV:', '')
-
-# Entrada para el nombre del archivo
-nombre_archivo = st.text_input('Ingrese el nombre del archivo CSV:', 'datos.csv')
+# Título de la aplicación
+st.title('Descargar CSV con Streamlit')
 
 # Crear un DataFrame de ejemplo
 data = {
@@ -46,20 +46,15 @@ data = {
 }
 df = pd.DataFrame(data)
 
-def guardar_csv(ruta, nombre):
-    # Construir la ruta completa del archivo
-    ruta_completa = os.path.join(ruta, nombre)
-    # Guardar el DataFrame como CSV
-    df.to_csv(ruta_completa, index=False)
-    return ruta_completa
+# Función para convertir el DataFrame a CSV y codificarlo para la descarga
+def get_csv_download_link(df):
+    # Convertir DataFrame a CSV
+    csv = df.to_csv(index=False)
+    # Codificar y crear el enlace de descarga
+    b64 = base64.b64encode(csv.encode()).decode()
+    href = f'<a href="data:file/csv;base64,{b64}" download="datos.csv">Descargar CSV</a>'
+    return href
 
-if st.button('Guardar CSV'):
-    if ruta_trabajo and nombre_archivo:
-        # Asegurarse de que la ruta existe
-        if not os.path.exists(ruta_trabajo):
-            st.error("La ruta especificada no existe. Por favor, ingrese una ruta válida.")
-        else:
-            ruta_completa = guardar_csv(ruta_trabajo, nombre_archivo)
-            st.success(f'Archivo CSV guardado exitosamente en: {ruta_completa}')
-    else:
-        st.error('Por favor, complete los campos de ruta y nombre del archivo.')
+# Botón para descargar el CSV
+if st.button('Descargar CSV'):
+    st.markdown(get_csv_download_link(df), unsafe_allow_html=True)
