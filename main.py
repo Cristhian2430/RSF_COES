@@ -1,12 +1,13 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title   = "Reserva Secundaria de Frecuencia (RSF)", 
+st.set_page_config(page_title   = "RSF", 
                    page_icon    = ":syringe:",
                    layout       = "wide")
 
-# Crear una entrada de texto para que el usuario ingrese una cadena
-user_input = st.text_input('Ingrese su texto:', 'EJE - PROGMW')
+st.title('Reserva Secundaria de Frecuencia (RSF)')
+
+ruta_trabajo = st.text_input('Ingrese la ruta de trabajo donde desea guardar los archivos:', '')
 
 # Función para eliminar espacios en blanco
 def remove_spaces(input_string):
